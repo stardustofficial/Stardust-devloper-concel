@@ -426,17 +426,9 @@
             background: rgba(34, 197, 94, 0.15);
             color: var(--green);
         }
-        .app-list-item .app-status.pending {
-            background: rgba(234, 179, 8, 0.15);
-            color: var(--yellow);
-        }
         .app-list-item .app-status.draft {
             background: rgba(107, 114, 128, 0.15);
             color: var(--text-gray);
-        }
-        .app-list-item .app-status.hidden {
-            background: rgba(239, 68, 68, 0.15);
-            color: var(--red);
         }
         .app-list-item .app-actions {
             display: flex;
@@ -1190,11 +1182,6 @@
                         <div class="stat-label">Average Rating</div>
                     </div>
                     <div class="stat-card">
-                        <svg class="stat-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
-                        <div class="stat-value" id="statUpdates">0</div>
-                        <div class="stat-label">Updates Available</div>
-                    </div>
-                    <div class="stat-card">
                         <svg class="stat-icon" viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
                         <div class="stat-value" id="statReviewsCount">0</div>
                         <div class="stat-label">Total Reviews</div>
@@ -1404,10 +1391,10 @@
                         </div>
                         <div class="form-row">
                             <div class="form-group">
-                                <label>Save as Draft</label>
+                                <label>Publish Status</label>
                                 <select id="upStatus">
-                                    <option value="draft">Draft</option>
-                                    <option value="pending">Publish (Go Live)</option>
+                                    <option value="live">Publish Live</option>
+                                    <option value="draft">Save as Draft</option>
                                 </select>
                             </div>
                         </div>
@@ -1834,6 +1821,7 @@
             db.ref('apps').on('value', snapshot => {
                 const data = snapshot.val();
                 allApps = data ? Object.keys(data).map(key => ({ id: key, ...data[key] })) : [];
+                // Filter by developer
                 if (currentUser) {
                     allApps = allApps.filter(a => a.developerUid === currentUser.uid);
                 }
@@ -1856,10 +1844,8 @@
             const reviews = allApps.reduce((s, a) => s + (a.reviewCount || 0), 0);
             const ratings = allApps.filter(a => a.rating).map(a => a.rating);
             const avgRating = ratings.length ? (ratings.reduce((s, r) => s + r, 0) / ratings.length) : 0;
-            const updates = allApps.filter(a => a.status === 'pending_update').length;
             const live = allApps.filter(a => a.status === 'live' || a.status === 'approved').length;
 
-            // Monthly downloads (last 30 days)
             const monthAgo = Date.now() - (30 * 24 * 60 * 60 * 1000);
             const monthly = allApps.reduce((s, a) => {
                 if (a.downloadDate && new Date(a.downloadDate).getTime() > monthAgo) {
@@ -1873,12 +1859,11 @@
             $('statViews').textContent = views.toLocaleString();
             $('statRating').textContent = avgRating.toFixed(1);
             $('statReviewsCount').textContent = reviews;
-            $('statUpdates').textContent = updates;
             $('statMonthlyDownloads').textContent = monthly.toLocaleString();
             $('statLiveApps').textContent = live;
             $('appCountBadge').textContent = total;
 
-            // Chart - simulate 7 days
+            // Chart
             const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
             const maxHeight = 100;
             days.forEach((day, i) => {
@@ -1928,12 +1913,9 @@
                 const statusMap = {
                     'live': { class: 'live', label: 'Live' },
                     'approved': { class: 'live', label: 'Live' },
-                    'pending': { class: 'pending', label: 'Pending' },
-                    'draft': { class: 'draft', label: 'Draft' },
-                    'hidden': { class: 'hidden', label: 'Hidden' },
-                    'suspended': { class: 'hidden', label: 'Suspended' }
+                    'draft': { class: 'draft', label: 'Draft' }
                 };
-                const st = statusMap[app.status] || statusMap['pending'];
+                const st = statusMap[app.status] || statusMap['live'];
                 const div = document.createElement('div');
                 div.className = 'app-list-item';
                 div.innerHTML = `
@@ -1983,7 +1965,6 @@
                     else if (i < currentStep) label.classList.add('done');
                 }
             }
-            // Save draft progress
             if (currentStep > 1) {
                 saveDraft();
             }
@@ -2122,6 +2103,8 @@
             Promise.all(uploadPromises).then(() => {
                 const packageName = $('upPackage').value.trim();
                 const status = $('upStatus').value;
+                // Default to live if not draft
+                const finalStatus = status === 'draft' ? 'draft' : 'live';
 
                 const appData = {
                     name: $('upName').value,
@@ -2148,7 +2131,7 @@
                     reviewCount: 0,
                     views: 0,
                     rating: 4.5,
-                    status: status === 'draft' ? 'draft' : 'pending',
+                    status: finalStatus,
                     timestamp: Date.now(),
                     updatedDate: new Date().toISOString().split('T')[0],
                     verified: false,
@@ -2164,19 +2147,17 @@
                     currentStep = 1;
                     updateSteps();
 
-                    // Clear draft
                     delete drafts['current'];
                     localStorage.setItem('stardust_drafts', JSON.stringify(drafts));
 
-                    // Add activity log
-                    addActivityLog(`App "${appData.name}" uploaded (${appData.status})`);
+                    addActivityLog(`App "${appData.name}" uploaded (${finalStatus})`);
 
-                    if (status === 'draft') {
+                    if (finalStatus === 'draft') {
                         addNotification(`App "${appData.name}" saved as draft!`);
                         alert('App saved as draft! You can publish it later.');
                     } else {
-                        addNotification(`App "${appData.name}" submitted for review!`);
-                        alert('App submitted! It will be reviewed and published soon.');
+                        addNotification(`App "${appData.name}" is now LIVE on the store!`);
+                        alert('App published successfully! It is now live on the Stardust Store.');
                     }
                     switchPage('myapps');
                 }).catch(err => {
@@ -2322,15 +2303,15 @@
                 version: version,
                 downloadUrl: apkUrl,
                 whatsNew: whatsNew,
-                status: 'pending_update',
+                status: 'live',
                 versionHistory: history,
                 updatedDate: new Date().toISOString().split('T')[0]
             }).then(() => {
-                addActivityLog(`Update for "${app.name}" to v${version} submitted`);
-                addNotification(`Update for "${app.name}" submitted for review!`);
+                addActivityLog(`Update for "${app.name}" to v${version} published`);
+                addNotification(`Update for "${app.name}" is now LIVE!`);
                 closeUpdateModal();
                 renderMyApps();
-                alert('Update submitted! It will be reviewed and published soon.');
+                alert('Update published successfully! App is now live with new version.');
             });
         }
 
@@ -2552,7 +2533,6 @@
                 `;
                 container.appendChild(div);
             });
-            // Mark as read
             if (allNotifications.length > 0) {
                 db.ref(`notifications/${currentUser.uid}`).once('value').then(snap => {
                     const data = snap.val();
@@ -2580,7 +2560,7 @@
                 alert('No activity logged yet.');
                 return;
             }
-            let msg = '📜 Recent Activity:\n\n';
+            let msg = 'Recent Activity:\n\n';
             activityLog.slice(0, 20).forEach(log => {
                 const date = new Date(log.timestamp).toLocaleString();
                 msg += `• ${date}: ${log.action}\n`;
@@ -2594,7 +2574,7 @@
                 alert('No drafts saved.');
                 return;
             }
-            let msg = '📂 Saved Drafts:\n\n';
+            let msg = 'Saved Drafts:\n\n';
             draftKeys.forEach(key => {
                 const d = drafts[key];
                 msg += `• ${d.name || 'Untitled'} (Step ${d.step || 1})\n`;
@@ -2761,8 +2741,6 @@
         // ============================================
         document.addEventListener('DOMContentLoaded', () => {
             showLoading(true, 'Starting Stardust Console...');
-
-            // Load draft if exists
             loadDraft();
 
             if (auth.currentUser) {
@@ -2778,7 +2756,7 @@
         console.log('📦 Features: Dashboard, App Management, Upload Wizard, Analytics, Reviews, Notifications, Profile, Settings');
         console.log('🔄 Real-time: Apps sync automatically with Firebase');
         console.log('📝 Drafts: Save progress and continue later');
-        console.log('📜 Activity Log: Track all your actions');
+        console.log('✅ Apps go LIVE immediately after upload - no approval needed!');
     </script>
 </body>
 </html>

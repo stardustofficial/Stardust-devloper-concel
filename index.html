@@ -66,7 +66,6 @@
             border-radius: 10px;
         }
 
-        /* ===== LOGIN PAGE ===== */
         .login-page {
             min-height: 100vh;
             display: flex;
@@ -150,12 +149,6 @@
             margin-top: 8px;
             text-align: center;
         }
-        .login-box .success-msg {
-            color: var(--green);
-            font-size: 13px;
-            margin-top: 8px;
-            text-align: center;
-        }
         .login-box .toggle-mode {
             text-align: center;
             margin-top: 16px;
@@ -170,23 +163,7 @@
         .login-box .toggle-mode span:hover {
             text-decoration: underline;
         }
-        .login-box .divider {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin: 16px 0;
-            color: var(--text-muted);
-            font-size: 12px;
-        }
-        .login-box .divider::before,
-        .login-box .divider::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background: var(--border-color);
-        }
 
-        /* ===== MAIN APP ===== */
         .app-container {
             display: none;
             min-height: 100vh;
@@ -195,7 +172,6 @@
             display: flex;
         }
 
-        /* ===== SIDEBAR ===== */
         .sidebar {
             width: 240px;
             background: var(--bg-card);
@@ -274,7 +250,6 @@
             padding-top: 12px;
         }
 
-        /* ===== MAIN CONTENT ===== */
         .main-content {
             flex: 1;
             padding: 24px 32px;
@@ -282,7 +257,6 @@
             max-height: 100vh;
         }
 
-        /* ===== HEADER ===== */
         .top-header {
             display: flex;
             justify-content: space-between;
@@ -320,16 +294,10 @@
             font-size: 12px;
             color: var(--text-gray);
         }
-        .top-header .user-info .verified-badge {
-            color: var(--green);
-            font-size: 12px;
-            font-weight: 600;
-        }
 
-        /* ===== DASHBOARD STATS ===== */
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
             gap: 16px;
             margin-bottom: 24px;
         }
@@ -338,6 +306,10 @@
             border: 1px solid var(--border-color);
             border-radius: var(--radius-sm);
             padding: 16px 18px;
+            transition: var(--transition);
+        }
+        .stat-card:hover {
+            border-color: var(--primary);
         }
         .stat-card .stat-value {
             font-size: 24px;
@@ -350,13 +322,12 @@
         }
         .stat-card .stat-icon {
             float: right;
-            width: 32px;
-            height: 32px;
+            width: 28px;
+            height: 28px;
             fill: var(--primary);
-            opacity: 0.5;
+            opacity: 0.4;
         }
 
-        /* ===== WELCOME BANNER ===== */
         .welcome-banner {
             background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             border-radius: var(--radius);
@@ -373,7 +344,6 @@
             margin-top: 4px;
         }
 
-        /* ===== QUICK ACTIONS ===== */
         .quick-actions {
             display: flex;
             gap: 12px;
@@ -403,7 +373,6 @@
             fill: var(--primary);
         }
 
-        /* ===== PAGE SECTIONS ===== */
         .page-section {
             display: none;
         }
@@ -411,7 +380,6 @@
             display: block;
         }
 
-        /* ===== APP LIST ===== */
         .app-list-item {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
@@ -462,13 +430,13 @@
             background: rgba(234, 179, 8, 0.15);
             color: var(--yellow);
         }
-        .app-list-item .app-status.rejected {
-            background: rgba(239, 68, 68, 0.15);
-            color: var(--red);
-        }
-        .app-list-item .app-status.suspended {
+        .app-list-item .app-status.draft {
             background: rgba(107, 114, 128, 0.15);
             color: var(--text-gray);
+        }
+        .app-list-item .app-status.hidden {
+            background: rgba(239, 68, 68, 0.15);
+            color: var(--red);
         }
         .app-list-item .app-actions {
             display: flex;
@@ -496,7 +464,6 @@
             color: var(--green);
         }
 
-        /* ===== UPLOAD FORM ===== */
         .upload-form {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
@@ -568,8 +535,43 @@
             width: 50px;
             height: 90px;
         }
+        .upload-form .step-indicators {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 24px;
+            justify-content: center;
+        }
+        .upload-form .step-indicators .step {
+            padding: 6px 18px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            background: var(--bg-input);
+            border: 1px solid var(--border-color);
+            color: var(--text-gray);
+        }
+        .upload-form .step-indicators .step.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        .upload-form .step-indicators .step.done {
+            background: var(--green);
+            color: white;
+            border-color: var(--green);
+        }
+        .upload-form .step-content {
+            display: none;
+        }
+        .upload-form .step-content.active {
+            display: block;
+        }
+        .upload-form .step-nav {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+        }
 
-        /* ===== REVIEWS ===== */
         .review-filter {
             display: flex;
             gap: 8px;
@@ -608,10 +610,6 @@
         }
         .review-item .rev-head .rev-stars {
             color: var(--gold);
-        }
-        .review-item .rev-head .rev-app {
-            font-size: 12px;
-            color: var(--text-gray);
         }
         .review-item .rev-text {
             color: var(--text-gray);
@@ -659,7 +657,6 @@
             color: var(--primary-light);
         }
 
-        /* ===== NOTIFICATIONS ===== */
         .notif-item {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
@@ -694,7 +691,6 @@
             color: var(--text-muted);
         }
 
-        /* ===== PROFILE ===== */
         .profile-edit {
             max-width: 500px;
         }
@@ -730,7 +726,6 @@
             fill: white;
         }
 
-        /* ===== SETTINGS ===== */
         .settings-group {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
@@ -777,7 +772,6 @@
             color: var(--red);
         }
 
-        /* ===== EMPTY STATE ===== */
         .empty-state {
             text-align: center;
             padding: 60px 20px;
@@ -808,82 +802,60 @@
             font-weight: 600;
         }
 
-        /* ===== RESPONSIVE ===== */
-        @media (max-width: 768px) {
-            .sidebar {
-                width: 60px;
-                padding: 12px 0;
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            backdrop-filter: blur(8px);
+        }
+        .modal-overlay.open {
+            display: flex;
+        }
+        .modal-content {
+            max-width: 90%;
+            max-height: 85vh;
+            border-radius: var(--radius);
+            background: var(--bg-dark);
+            border: 1px solid var(--border-color);
+            padding: 24px;
+            overflow-y: auto;
+            width: 100%;
+            max-width: 550px;
+            animation: modalIn 0.25s ease;
+        }
+        @keyframes modalIn {
+            from {
+                transform: scale(0.95);
+                opacity: 0;
             }
-            .sidebar .brand h2,
-            .sidebar .brand span,
-            .sidebar .nav-item span {
-                display: none;
-            }
-            .sidebar .nav-item {
-                padding: 12px 18px;
-                justify-content: center;
-            }
-            .sidebar .nav-item svg {
-                width: 22px;
-                height: 22px;
-            }
-            .sidebar .nav-item .badge {
-                display: none;
-            }
-            .main-content {
-                padding: 16px;
-            }
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .upload-form .form-row {
-                grid-template-columns: 1fr;
-            }
-            .app-list-item {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            .app-list-item .app-actions {
-                width: 100%;
-                flex-wrap: wrap;
-            }
-            .top-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 10px;
-            }
-            .quick-actions {
-                flex-direction: column;
-            }
-            .quick-actions .qa-btn {
-                justify-content: center;
-            }
-            .login-box {
-                padding: 28px 20px;
-                margin: 0 12px;
+            to {
+                transform: scale(1);
+                opacity: 1;
             }
         }
-
-        @media (max-width: 480px) {
-            .stats-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 10px;
-            }
-            .stat-card {
-                padding: 12px 14px;
-            }
-            .stat-card .stat-value {
-                font-size: 18px;
-            }
-            .welcome-banner {
-                padding: 18px 20px;
-            }
-            .welcome-banner h2 {
-                font-size: 18px;
-            }
+        .modal-close {
+            float: right;
+            background: var(--bg-input);
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: var(--text-gray);
+            transition: var(--transition);
+        }
+        .modal-close:hover {
+            background: var(--border-color);
+            color: white;
         }
 
-        /* ===== LOADING ===== */
         .loading-overlay {
             position: fixed;
             inset: 0;
@@ -991,17 +963,93 @@
             border-color: var(--red);
             color: var(--red);
         }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 60px;
+                padding: 12px 0;
+            }
+            .sidebar .brand h2,
+            .sidebar .brand span,
+            .sidebar .nav-item span {
+                display: none;
+            }
+            .sidebar .nav-item {
+                padding: 12px 18px;
+                justify-content: center;
+            }
+            .sidebar .nav-item svg {
+                width: 22px;
+                height: 22px;
+            }
+            .sidebar .nav-item .badge {
+                display: none;
+            }
+            .main-content {
+                padding: 16px;
+            }
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .upload-form .form-row {
+                grid-template-columns: 1fr;
+            }
+            .app-list-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .app-list-item .app-actions {
+                width: 100%;
+                flex-wrap: wrap;
+            }
+            .top-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            .quick-actions {
+                flex-direction: column;
+            }
+            .quick-actions .qa-btn {
+                justify-content: center;
+            }
+            .login-box {
+                padding: 28px 20px;
+                margin: 0 12px;
+            }
+        }
+        @media (max-width: 480px) {
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+            }
+            .stat-card {
+                padding: 12px 14px;
+            }
+            .stat-card .stat-value {
+                font-size: 18px;
+            }
+            .welcome-banner {
+                padding: 18px 20px;
+            }
+            .welcome-banner h2 {
+                font-size: 18px;
+            }
+            .modal-content {
+                padding: 16px;
+            }
+        }
     </style>
 </head>
 <body>
 
-    <!-- ===== LOADING ===== -->
+    <!-- LOADING -->
     <div class="loading-overlay" id="loadingOverlay">
         <div class="spinner"></div>
         <div id="loadingText" style="color:var(--text-gray);font-size:14px;">Loading...</div>
     </div>
 
-    <!-- ===== LOGIN PAGE ===== -->
+    <!-- LOGIN PAGE -->
     <div class="login-page" id="loginPage">
         <div class="login-box">
             <div class="logo">
@@ -1021,17 +1069,17 @@
                 </div>
                 <button type="submit" class="btn-primary" id="loginBtn">Sign In</button>
                 <div id="loginError" class="error-msg"></div>
-                <div class="toggle-mode" id="toggleMode">
+                <div class="toggle-mode">
                     Don't have an account? <span onclick="switchAuthMode()">Create one</span>
                 </div>
             </form>
         </div>
     </div>
 
-    <!-- ===== MAIN APP ===== -->
+    <!-- MAIN APP -->
     <div class="app-container" id="appContainer">
 
-        <!-- ===== SIDEBAR ===== -->
+        <!-- SIDEBAR -->
         <aside class="sidebar" id="sidebar">
             <div class="brand">
                 <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
@@ -1061,11 +1109,6 @@
                 <span>Reviews</span>
                 <span class="badge red" id="reviewBadge">0</span>
             </div>
-            <div class="nav-item" data-page="updates" onclick="switchPage('updates')">
-                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
-                <span>Updates</span>
-                <span class="badge yellow" id="updateBadge">0</span>
-            </div>
             <div class="nav-item" data-page="notifications" onclick="switchPage('notifications')">
                 <svg viewBox="0 0 24 24"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2zm-2 1H8v-6c0-2.48 1.51-4.5 4-4.5s4 2.02 4 4.5v6z"/></svg>
                 <span>Notifications</span>
@@ -1088,10 +1131,10 @@
             </div>
         </aside>
 
-        <!-- ===== MAIN CONTENT ===== -->
+        <!-- MAIN CONTENT -->
         <main class="main-content">
 
-            <!-- ===== TOP HEADER ===== -->
+            <!-- TOP HEADER -->
             <div class="top-header">
                 <div class="page-title" id="pageTitle">Dashboard</div>
                 <div class="user-info">
@@ -1103,11 +1146,11 @@
                 </div>
             </div>
 
-            <!-- ===== DASHBOARD ===== -->
+            <!-- DASHBOARD -->
             <div class="page-section active" id="section-dashboard">
                 <div class="welcome-banner">
                     <h2 id="welcomeMsg">Welcome Back, Developer</h2>
-                    <p>Here's what's happening with your apps today.</p>
+                    <p>Manage your apps and track performance from one place.</p>
                 </div>
 
                 <div class="quick-actions">
@@ -1122,10 +1165,6 @@
                     <button class="qa-btn" onclick="switchPage('myapps')">
                         <svg viewBox="0 0 24 24"><path d="M4 6h16v2H4V6zm0 5h16v2H4v-2zm0 5h10v2H4v-2z"/></svg>
                         My Apps
-                    </button>
-                    <button class="qa-btn" onclick="switchPage('updates')">
-                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
-                        Upload Update
                     </button>
                 </div>
 
@@ -1151,19 +1190,70 @@
                         <div class="stat-label">Average Rating</div>
                     </div>
                     <div class="stat-card">
+                        <svg class="stat-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
+                        <div class="stat-value" id="statUpdates">0</div>
+                        <div class="stat-label">Updates Available</div>
+                    </div>
+                    <div class="stat-card">
                         <svg class="stat-icon" viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
-                        <div class="stat-value" id="statReviews">0</div>
+                        <div class="stat-value" id="statReviewsCount">0</div>
                         <div class="stat-label">Total Reviews</div>
                     </div>
                     <div class="stat-card">
-                        <svg class="stat-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
-                        <div class="stat-value" id="statPendingUpdates">0</div>
-                        <div class="stat-label">Pending Updates</div>
+                        <svg class="stat-icon" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+                        <div class="stat-value" id="statMonthlyDownloads">0</div>
+                        <div class="stat-label">Monthly Downloads</div>
+                    </div>
+                    <div class="stat-card">
+                        <svg class="stat-icon" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                        <div class="stat-value" id="statLiveApps">0</div>
+                        <div class="stat-label">Live Apps</div>
+                    </div>
+                </div>
+
+                <!-- Charts placeholder -->
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:8px;">
+                    <div style="background:var(--bg-card);border:1px solid var(--border-color);border-radius:var(--radius-sm);padding:20px;">
+                        <h4 style="margin-bottom:12px;">Downloads (7 Days)</h4>
+                        <div style="height:120px;display:flex;align-items:flex-end;gap:8px;padding-top:8px;">
+                            <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
+                                <div style="width:100%;background:var(--primary);border-radius:4px;height:0%;transition:height 0.5s;" id="chartDay1"></div>
+                                <span style="font-size:10px;color:var(--text-gray);">Mon</span>
+                            </div>
+                            <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
+                                <div style="width:100%;background:var(--primary);border-radius:4px;height:0%;transition:height 0.5s;" id="chartDay2"></div>
+                                <span style="font-size:10px;color:var(--text-gray);">Tue</span>
+                            </div>
+                            <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
+                                <div style="width:100%;background:var(--primary);border-radius:4px;height:0%;transition:height 0.5s;" id="chartDay3"></div>
+                                <span style="font-size:10px;color:var(--text-gray);">Wed</span>
+                            </div>
+                            <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
+                                <div style="width:100%;background:var(--primary);border-radius:4px;height:0%;transition:height 0.5s;" id="chartDay4"></div>
+                                <span style="font-size:10px;color:var(--text-gray);">Thu</span>
+                            </div>
+                            <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
+                                <div style="width:100%;background:var(--primary);border-radius:4px;height:0%;transition:height 0.5s;" id="chartDay5"></div>
+                                <span style="font-size:10px;color:var(--text-gray);">Fri</span>
+                            </div>
+                            <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
+                                <div style="width:100%;background:var(--primary);border-radius:4px;height:0%;transition:height 0.5s;" id="chartDay6"></div>
+                                <span style="font-size:10px;color:var(--text-gray);">Sat</span>
+                            </div>
+                            <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
+                                <div style="width:100%;background:var(--primary);border-radius:4px;height:0%;transition:height 0.5s;" id="chartDay7"></div>
+                                <span style="font-size:10px;color:var(--text-gray);">Sun</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="background:var(--bg-card);border:1px solid var(--border-color);border-radius:var(--radius-sm);padding:20px;">
+                        <h4 style="margin-bottom:12px;">Top Downloaded Apps</h4>
+                        <div id="topAppsList" style="font-size:13px;color:var(--text-gray);"></div>
                     </div>
                 </div>
             </div>
 
-            <!-- ===== MY APPS ===== -->
+            <!-- MY APPS -->
             <div class="page-section" id="section-myapps">
                 <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:8px;">
                     <h3>My Applications</h3>
@@ -1175,164 +1265,187 @@
                 <div id="myAppsList"></div>
             </div>
 
-            <!-- ===== UPLOAD ===== -->
+            <!-- UPLOAD -->
             <div class="page-section" id="section-upload">
                 <h3 style="margin-bottom:16px;">Upload New Application</h3>
                 <form class="upload-form" id="uploadForm" onsubmit="handleUpload(event)">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>App Name <span class="required">*</span></label>
-                            <input type="text" id="upName" required placeholder="My Awesome App" />
+                    <div class="step-indicators">
+                        <span class="step active" id="step1Label">Step 1</span>
+                        <span class="step" id="step2Label">Step 2</span>
+                        <span class="step" id="step3Label">Step 3</span>
+                        <span class="step" id="step4Label">Step 4</span>
+                    </div>
+
+                    <!-- Step 1 -->
+                    <div class="step-content active" id="step1">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>App Name <span class="required">*</span></label>
+                                <input type="text" id="upName" required placeholder="My Awesome App" />
+                            </div>
+                            <div class="form-group">
+                                <label>Category <span class="required">*</span></label>
+                                <select id="upCategory" required>
+                                    <option value="">Select Category</option>
+                                    <option>Games</option><option>Social</option><option>AI</option>
+                                    <option>Entertainment</option><option>Tools</option><option>Shopping</option>
+                                    <option>Music</option><option>Education</option><option>Health</option>
+                                    <option>Photography</option><option>Finance</option><option>Travel</option>
+                                </select>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label>Package Name <span class="required">*</span></label>
-                            <input type="text" id="upPackage" required placeholder="com.example.app" />
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Package Name <span class="required">*</span></label>
+                                <input type="text" id="upPackage" required placeholder="com.example.app" />
+                            </div>
+                            <div class="form-group">
+                                <label>Short Description <span class="required">*</span></label>
+                                <input type="text" id="upShortDesc" required placeholder="Brief description..." />
+                            </div>
+                        </div>
+                        <div class="step-nav">
+                            <button type="button" class="btn-primary" onclick="nextStep(2)">Next Step</button>
                         </div>
                     </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Category <span class="required">*</span></label>
-                            <select id="upCategory" required>
-                                <option value="">Select Category</option>
-                                <option>Games</option><option>Social</option><option>AI</option>
-                                <option>Entertainment</option><option>Tools</option><option>Shopping</option>
-                                <option>Music</option><option>Education</option><option>Health</option>
-                                <option>Photography</option><option>Finance</option><option>Travel</option>
-                            </select>
+
+                    <!-- Step 2 -->
+                    <div class="step-content" id="step2">
+                        <div class="form-row full">
+                            <div class="form-group">
+                                <label>Full Description <span class="required">*</span></label>
+                                <textarea id="upLongDesc" rows="4" required placeholder="Detailed description..."></textarea>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label>Version <span class="required">*</span></label>
-                            <input type="text" id="upVersion" required placeholder="v1.0.0" />
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Tags (comma separated)</label>
+                                <input type="text" id="upTags" placeholder="game, action, multiplayer" />
+                            </div>
+                            <div class="form-group">
+                                <label>Support Email</label>
+                                <input type="email" id="upSupportEmail" placeholder="support@example.com" />
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>APK Download URL <span class="required">*</span></label>
-                            <input type="url" id="upApkUrl" required placeholder="https://example.com/app.apk" />
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Privacy Policy URL</label>
+                                <input type="url" id="upPrivacy" placeholder="https://example.com/privacy" />
+                            </div>
+                            <div class="form-group">
+                                <label>Website</label>
+                                <input type="url" id="upWebsite" placeholder="https://example.com" />
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label>APK Size (MB)</label>
-                            <input type="text" id="upSize" placeholder="42 MB" />
-                        </div>
-                    </div>
-                    <div class="form-row full">
-                        <div class="form-group">
-                            <label>Short Description <span class="required">*</span></label>
-                            <input type="text" id="upShortDesc" required placeholder="Brief description..." />
-                        </div>
-                    </div>
-                    <div class="form-row full">
-                        <div class="form-group">
-                            <label>Full Description <span class="required">*</span></label>
-                            <textarea id="upLongDesc" rows="4" required placeholder="Detailed description..."></textarea>
+                        <div class="step-nav">
+                            <button type="button" class="btn-outline" onclick="prevStep(1)">Previous</button>
+                            <button type="button" class="btn-primary" onclick="nextStep(3)">Next Step</button>
                         </div>
                     </div>
-                    <div class="form-row full">
-                        <div class="form-group">
-                            <label>What's New (one per line)</label>
-                            <textarea id="upWhatsNew" rows="3" placeholder="Bug fixes&#10;Dark mode added&#10;Performance improvements"></textarea>
+
+                    <!-- Step 3 -->
+                    <div class="step-content" id="step3">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>APK Download URL <span class="required">*</span></label>
+                                <input type="url" id="upApkUrl" required placeholder="https://example.com/app.apk" />
+                            </div>
+                            <div class="form-group">
+                                <label>Version <span class="required">*</span></label>
+                                <input type="text" id="upVersion" required placeholder="v1.0.0" />
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>APK Size (MB)</label>
+                                <input type="text" id="upSize" placeholder="42 MB" />
+                            </div>
+                            <div class="form-group">
+                                <label>App Icon <span class="required">*</span></label>
+                                <input type="file" id="upIcon" accept="image/*" required onchange="previewUploadImage(this, 'iconPreview')" />
+                                <div class="preview-box" id="iconPreview"></div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Feature Banner</label>
+                                <input type="file" id="upBanner" accept="image/*" onchange="previewUploadImage(this, 'bannerPreview')" />
+                                <div class="preview-box" id="bannerPreview"></div>
+                            </div>
+                            <div class="form-group">
+                                <label>Screenshots (select multiple)</label>
+                                <input type="file" id="upScreenshots" accept="image/*" multiple onchange="previewUploadScreens(this)" />
+                                <div class="preview-box" id="screensPreview"></div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>YouTube Video ID (optional)</label>
+                                <input type="text" id="upYoutube" placeholder="dQw4w9WgXcQ" />
+                            </div>
+                            <div class="form-group">
+                                <label>Minimum Android</label>
+                                <input type="text" id="upMinAndroid" placeholder="5.0" />
+                            </div>
+                        </div>
+                        <div class="step-nav">
+                            <button type="button" class="btn-outline" onclick="prevStep(2)">Previous</button>
+                            <button type="button" class="btn-primary" onclick="nextStep(4)">Next Step</button>
                         </div>
                     </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>App Icon <span class="required">*</span></label>
-                            <input type="file" id="upIcon" accept="image/*" required onchange="previewUploadImage(this, 'iconPreview')" />
-                            <div class="preview-box" id="iconPreview"></div>
+
+                    <!-- Step 4 -->
+                    <div class="step-content" id="step4">
+                        <div class="form-row full">
+                            <div class="form-group">
+                                <label>Release Notes (What's New)</label>
+                                <textarea id="upWhatsNew" rows="4" placeholder="Version 2.0&#10;Added Voice Call&#10;Bug Fixed&#10;Better UI"></textarea>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label>Feature Banner</label>
-                            <input type="file" id="upBanner" accept="image/*" onchange="previewUploadImage(this, 'bannerPreview')" />
-                            <div class="preview-box" id="bannerPreview"></div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Save as Draft</label>
+                                <select id="upStatus">
+                                    <option value="draft">Draft</option>
+                                    <option value="pending">Publish (Go Live)</option>
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-row full">
-                        <div class="form-group">
-                            <label>Screenshots (select multiple)</label>
-                            <input type="file" id="upScreenshots" accept="image/*" multiple onchange="previewUploadScreens(this)" />
-                            <div class="preview-box" id="screensPreview"></div>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Privacy Policy URL</label>
-                            <input type="url" id="upPrivacy" placeholder="https://example.com/privacy" />
-                        </div>
-                        <div class="form-group">
-                            <label>Website</label>
-                            <input type="url" id="upWebsite" placeholder="https://example.com" />
+                        <div class="step-nav">
+                            <button type="button" class="btn-outline" onclick="prevStep(3)">Previous</button>
+                            <button type="submit" class="btn-primary">
+                                <span id="uploadBtnText">Publish App</span>
+                            </button>
                         </div>
                     </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Support Email</label>
-                            <input type="email" id="upSupportEmail" placeholder="support@example.com" />
-                        </div>
-                        <div class="form-group">
-                            <label>YouTube Video ID (optional)</label>
-                            <input type="text" id="upYoutube" placeholder="dQw4w9WgXcQ" />
-                        </div>
-                    </div>
-                    <div class="form-row full">
-                        <div class="form-group">
-                            <label>Tags (comma separated)</label>
-                            <input type="text" id="upTags" placeholder="game, action, multiplayer" />
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Minimum Android</label>
-                            <input type="text" id="upMinAndroid" placeholder="5.0" />
-                        </div>
-                        <div class="form-group">
-                            <label>Target Android</label>
-                            <input type="text" id="upTargetAndroid" placeholder="12.0" />
-                        </div>
-                    </div>
-                    <button type="submit" class="btn-primary w-full" style="margin-top:8px;">
-                        <span id="uploadBtnText">Upload Application</span>
-                    </button>
                 </form>
             </div>
 
-            <!-- ===== ANALYTICS ===== -->
+            <!-- ANALYTICS -->
             <div class="page-section" id="section-analytics">
-                <h3 style="margin-bottom:16px;">Analytics Dashboard</h3>
-                <div class="stats-grid" id="analyticsStats">
-                    <div class="stat-card">
-                        <div class="stat-value" id="anaTodayDownloads">0</div>
-                        <div class="stat-label">Today Downloads</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-value" id="anaTodayViews">0</div>
-                        <div class="stat-label">Today Views</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-value" id="anaTodayInstalls">0</div>
-                        <div class="stat-label">Today Installs</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-value" id="anaWeekDownloads">0</div>
-                        <div class="stat-label">This Week</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-value" id="anaMonthDownloads">0</div>
-                        <div class="stat-label">This Month</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-value" id="anaYearDownloads">0</div>
-                        <div class="stat-label">This Year</div>
-                    </div>
+                <h3 style="margin-bottom:16px;">Analytics</h3>
+                <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px;">
+                    <select id="anaAppSelect" onchange="loadAppAnalytics()" style="background:var(--bg-input);border:1px solid var(--border-color);border-radius:8px;padding:8px 14px;color:var(--text-light);font-size:14px;">
+                        <option value="">Select App</option>
+                    </select>
                 </div>
-                <div style="background:var(--bg-card);border:1px solid var(--border-color);border-radius:var(--radius-sm);padding:20px;text-align:center;color:var(--text-gray);">
-                    <div style="font-size:32px;margin-bottom:8px;">📊</div>
-                    <p>Charts will be displayed here</p>
-                    <p style="font-size:13px;">Daily Downloads, Monthly Downloads, Country-wise, Device Types, Android Versions</p>
+                <div id="analyticsContainer">
+                    <div class="empty-state">
+                        <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg>
+                        <h3>Select an App</h3>
+                        <p>Choose an app from the dropdown to see analytics.</p>
+                    </div>
                 </div>
             </div>
 
-            <!-- ===== REVIEWS ===== -->
+            <!-- REVIEWS -->
             <div class="page-section" id="section-reviews">
                 <h3 style="margin-bottom:12px;">App Reviews</h3>
+                <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:12px;">
+                    <select id="reviewAppSelect" onchange="loadReviews()" style="background:var(--bg-input);border:1px solid var(--border-color);border-radius:8px;padding:8px 14px;color:var(--text-light);font-size:14px;">
+                        <option value="">Select App</option>
+                    </select>
+                </div>
                 <div class="review-filter" id="reviewFilter">
                     <button class="active" data-star="all" onclick="filterReviews('all')">All</button>
                     <button data-star="5" onclick="filterReviews(5)">5 ★</button>
@@ -1344,19 +1457,13 @@
                 <div id="reviewsList"></div>
             </div>
 
-            <!-- ===== UPDATES ===== -->
-            <div class="page-section" id="section-updates">
-                <h3 style="margin-bottom:16px;">App Updates</h3>
-                <div id="updatesList"></div>
-            </div>
-
-            <!-- ===== NOTIFICATIONS ===== -->
+            <!-- NOTIFICATIONS -->
             <div class="page-section" id="section-notifications">
                 <h3 style="margin-bottom:16px;">Notifications</h3>
                 <div id="notificationsList"></div>
             </div>
 
-            <!-- ===== PROFILE ===== -->
+            <!-- PROFILE -->
             <div class="page-section" id="section-profile">
                 <h3 style="margin-bottom:16px;">Developer Profile</h3>
                 <div class="profile-edit">
@@ -1373,6 +1480,10 @@
                     <div class="form-group">
                         <label>Developer Name</label>
                         <input type="text" id="profName" placeholder="Your name" />
+                    </div>
+                    <div class="form-group">
+                        <label>Bio</label>
+                        <textarea id="profBio" rows="3" placeholder="Tell us about yourself..."></textarea>
                     </div>
                     <div class="form-group">
                         <label>Website</label>
@@ -1394,7 +1505,7 @@
                 </div>
             </div>
 
-            <!-- ===== SETTINGS ===== -->
+            <!-- SETTINGS -->
             <div class="page-section" id="section-settings">
                 <h3 style="margin-bottom:16px;">Settings</h3>
                 <div class="settings-group">
@@ -1418,12 +1529,23 @@
                         <div><div class="label">Dark Mode</div><div class="sub">Toggle dark/light theme</div></div>
                         <button onclick="toggleThemeSettings()">Toggle</button>
                     </div>
+                    <div class="setting-row">
+                        <div><div class="label">Language</div><div class="sub">Select your preferred language</div></div>
+                        <button onclick="changeLanguage()">Change</button>
+                    </div>
                 </div>
                 <div class="settings-group">
-                    <h4>API</h4>
+                    <h4>Drafts</h4>
                     <div class="setting-row">
-                        <div><div class="label">API Key</div><div class="sub">Generate API key for integrations</div></div>
-                        <button onclick="generateApiKey()">Generate</button>
+                        <div><div class="label">Saved Drafts</div><div class="sub">Continue where you left off</div></div>
+                        <button onclick="viewDrafts()">View Drafts</button>
+                    </div>
+                </div>
+                <div class="settings-group">
+                    <h4>Activity Log</h4>
+                    <div class="setting-row">
+                        <div><div class="label">Recent Activity</div><div class="sub">Track your actions</div></div>
+                        <button onclick="viewActivityLog()">View Log</button>
                     </div>
                 </div>
             </div>
@@ -1431,7 +1553,81 @@
         </main>
     </div>
 
-    <!-- ===== FIREBASE ===== -->
+    <!-- DETAILS MODAL -->
+    <div class="modal-overlay" id="detailsModal" onclick="if(event.target===this)closeDetailsModal()">
+        <div class="modal-content" style="max-width:600px;">
+            <button class="modal-close" onclick="closeDetailsModal()">✕</button>
+            <h4 id="detailTitle" style="margin-bottom:16px;">App Details</h4>
+            <div id="detailContent"></div>
+        </div>
+    </div>
+
+    <!-- EDIT MODAL -->
+    <div class="modal-overlay" id="editModal" onclick="if(event.target===this)closeEditModal()">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeEditModal()">✕</button>
+            <h4 style="margin-bottom:16px;">Edit App</h4>
+            <form id="editForm" onsubmit="saveEdit(event)">
+                <div class="form-group">
+                    <label>App Name</label>
+                    <input type="text" id="editName" required />
+                </div>
+                <div class="form-group">
+                    <label>Category</label>
+                    <select id="editCategory">
+                        <option>Games</option><option>Social</option><option>AI</option>
+                        <option>Entertainment</option><option>Tools</option><option>Shopping</option>
+                        <option>Music</option><option>Education</option><option>Health</option>
+                        <option>Photography</option><option>Finance</option><option>Travel</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Short Description</label>
+                    <input type="text" id="editShortDesc" required />
+                </div>
+                <div class="form-group">
+                    <label>Full Description</label>
+                    <textarea id="editLongDesc" rows="4" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Tags (comma separated)</label>
+                    <input type="text" id="editTags" />
+                </div>
+                <div class="form-group">
+                    <label>Support Email</label>
+                    <input type="email" id="editSupportEmail" />
+                </div>
+                <input type="hidden" id="editAppId" />
+                <button type="submit" class="btn-primary">Save Changes</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- UPDATE MODAL -->
+    <div class="modal-overlay" id="updateModal" onclick="if(event.target===this)closeUpdateModal()">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeUpdateModal()">✕</button>
+            <h4 style="margin-bottom:16px;">Update App</h4>
+            <form id="updateForm" onsubmit="submitUpdate(event)">
+                <div class="form-group">
+                    <label>New Version <span class="required">*</span></label>
+                    <input type="text" id="updateVersion" required placeholder="v2.0.0" />
+                </div>
+                <div class="form-group">
+                    <label>APK URL <span class="required">*</span></label>
+                    <input type="url" id="updateApkUrl" required placeholder="https://example.com/app-v2.apk" />
+                </div>
+                <div class="form-group">
+                    <label>What's New <span class="required">*</span></label>
+                    <textarea id="updateWhatsNew" rows="4" required placeholder="Bug fixes&#10;New features&#10;Performance improvements"></textarea>
+                </div>
+                <input type="hidden" id="updateAppId" />
+                <button type="submit" class="btn-primary">Submit Update</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- FIREBASE -->
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
@@ -1467,10 +1663,14 @@
         let allApps = [];
         let allReviews = {};
         let allNotifications = [];
-        let isAdmin = false;
         let currentReviewFilter = 'all';
         let currentPage = 'dashboard';
         let isLoginMode = true;
+        let currentStep = 1;
+        let editAppId = null;
+        let updateAppId = null;
+        let drafts = JSON.parse(localStorage.getItem('stardust_drafts') || '{}');
+        let activityLog = JSON.parse(localStorage.getItem('stardust_activity_log') || '[]');
 
         // ============================================
         // DOM REFS
@@ -1505,7 +1705,6 @@
                     `Already have an account? <span onclick="switchAuthMode()">Sign in</span>`;
             }
             $('loginError').textContent = '';
-            $('loginMessage').textContent = '';
         }
 
         function handleAuth(e) {
@@ -1514,7 +1713,6 @@
             const password = $('loginPassword').value;
             const btn = $('loginBtn');
             const errorEl = $('loginError');
-            const msgEl = $('loginMessage');
 
             if (!email || !password) { errorEl.textContent = 'Please fill all fields.'; return; }
             if (password.length < 6) { errorEl.textContent = 'Password must be at least 6 characters.'; return; }
@@ -1522,7 +1720,6 @@
             btn.disabled = true;
             btn.textContent = isLoginMode ? 'Signing in...' : 'Creating account...';
             errorEl.textContent = '';
-            msgEl.textContent = '';
 
             const authFunc = isLoginMode ?
                 auth.signInWithEmailAndPassword(email, password) :
@@ -1532,40 +1729,13 @@
                 .then(result => {
                     btn.disabled = false;
                     btn.textContent = isLoginMode ? 'Sign In' : 'Create Account';
-                    // Check admin status
-                    checkAdminStatus(result.user);
+                    initApp(result.user);
                 })
                 .catch(err => {
                     btn.disabled = false;
                     btn.textContent = isLoginMode ? 'Sign In' : 'Create Account';
                     errorEl.textContent = err.message;
                 });
-        }
-
-        function checkAdminStatus(user) {
-            db.ref(`admins/${user.uid}`).once('value').then(snap => {
-                isAdmin = snap.val() === true;
-                if (isAdmin) {
-                    initApp(user);
-                } else {
-                    db.ref(`developers/${user.uid}`).once('value').then(snap => {
-                        if (snap.exists()) {
-                            initApp(user);
-                        } else {
-                            // Create developer profile
-                            db.ref(`developers/${user.uid}`).set({
-                                uid: user.uid,
-                                email: user.email,
-                                displayName: user.displayName || user.email.split('@')[0] || 'Developer',
-                                createdAt: Date.now(),
-                                apps: []
-                            }).then(() => {
-                                initApp(user);
-                            });
-                        }
-                    });
-                }
-            });
         }
 
         // ============================================
@@ -1598,7 +1768,7 @@
         auth.onAuthStateChanged(user => {
             if (user) {
                 if (!appContainer.classList.contains('show')) {
-                    checkAdminStatus(user);
+                    initApp(user);
                 }
             } else {
                 loginPage.style.display = 'flex';
@@ -1608,7 +1778,6 @@
             }
         });
 
-        // Check saved session
         if (localStorage.getItem('stardust_uid') && auth.currentUser) {
             // Already logged in
         }
@@ -1643,7 +1812,6 @@
                 upload: 'Upload App',
                 analytics: 'Analytics',
                 reviews: 'Reviews',
-                updates: 'Updates',
                 notifications: 'Notifications',
                 profile: 'Developer Profile',
                 settings: 'Settings'
@@ -1651,11 +1819,11 @@
             $('pageTitle').textContent = titles[page] || page;
 
             if (page === 'myapps') renderMyApps();
-            if (page === 'reviews') renderReviews();
-            if (page === 'updates') renderUpdates();
+            if (page === 'reviews') loadReviews();
             if (page === 'notifications') renderNotifications();
-            if (page === 'analytics') loadAnalytics();
+            if (page === 'analytics') populateAnalyticsSelect();
             if (page === 'profile') loadProfile();
+            if (page === 'dashboard') updateDashboard();
         }
 
         // ============================================
@@ -1671,7 +1839,8 @@
                 }
                 updateDashboard();
                 if (currentPage === 'myapps') renderMyApps();
-                if (currentPage === 'updates') renderUpdates();
+                if (currentPage === 'analytics') populateAnalyticsSelect();
+                if (currentPage === 'reviews') populateReviewSelect();
                 showLoading(false);
             }, err => { showLoading(false);
                 console.error(err); });
@@ -1687,16 +1856,55 @@
             const reviews = allApps.reduce((s, a) => s + (a.reviewCount || 0), 0);
             const ratings = allApps.filter(a => a.rating).map(a => a.rating);
             const avgRating = ratings.length ? (ratings.reduce((s, r) => s + r, 0) / ratings.length) : 0;
-            const pendingUpdates = allApps.filter(a => a.status === 'pending_update').length;
+            const updates = allApps.filter(a => a.status === 'pending_update').length;
+            const live = allApps.filter(a => a.status === 'live' || a.status === 'approved').length;
+
+            // Monthly downloads (last 30 days)
+            const monthAgo = Date.now() - (30 * 24 * 60 * 60 * 1000);
+            const monthly = allApps.reduce((s, a) => {
+                if (a.downloadDate && new Date(a.downloadDate).getTime() > monthAgo) {
+                    return s + (a.downloadCount || 0);
+                }
+                return s;
+            }, 0);
 
             $('statTotalApps').textContent = total;
             $('statDownloads').textContent = downloads.toLocaleString();
             $('statViews').textContent = views.toLocaleString();
             $('statRating').textContent = avgRating.toFixed(1);
-            $('statReviews').textContent = reviews;
-            $('statPendingUpdates').textContent = pendingUpdates;
+            $('statReviewsCount').textContent = reviews;
+            $('statUpdates').textContent = updates;
+            $('statMonthlyDownloads').textContent = monthly.toLocaleString();
+            $('statLiveApps').textContent = live;
             $('appCountBadge').textContent = total;
-            $('updateBadge').textContent = pendingUpdates;
+
+            // Chart - simulate 7 days
+            const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+            const maxHeight = 100;
+            days.forEach((day, i) => {
+                const val = Math.floor(Math.random() * 80 + 10);
+                const el = $(`chartDay${i + 1}`);
+                if (el) {
+                    el.style.height = `${(val / 100) * maxHeight}%`;
+                    el.title = `${day}: ${val} downloads`;
+                }
+            });
+
+            // Top apps
+            const topApps = [...allApps].sort((a, b) => (b.downloadCount || 0) - (a.downloadCount || 0)).slice(0, 5);
+            const topList = $('topAppsList');
+            topList.innerHTML = '';
+            if (topApps.length === 0) {
+                topList.innerHTML = '<p style="color:var(--text-gray);">No apps yet</p>';
+            } else {
+                topApps.forEach((app, i) => {
+                    topList.innerHTML +=
+                        `<div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid var(--border-color);">
+                            <span>${i + 1}. ${app.name}</span>
+                            <span style="color:var(--primary);">${app.downloadCount || 0}</span>
+                        </div>`;
+                });
+            }
         }
 
         // ============================================
@@ -1719,9 +1927,11 @@
             allApps.forEach(app => {
                 const statusMap = {
                     'live': { class: 'live', label: 'Live' },
-                    'pending': { class: 'pending', label: 'Pending Approval' },
-                    'rejected': { class: 'rejected', label: 'Rejected' },
-                    'suspended': { class: 'suspended', label: 'Suspended' }
+                    'approved': { class: 'live', label: 'Live' },
+                    'pending': { class: 'pending', label: 'Pending' },
+                    'draft': { class: 'draft', label: 'Draft' },
+                    'hidden': { class: 'hidden', label: 'Hidden' },
+                    'suspended': { class: 'hidden', label: 'Suspended' }
                 };
                 const st = statusMap[app.status] || statusMap['pending'];
                 const div = document.createElement('div');
@@ -1731,14 +1941,15 @@
                         <img src="${app.icon || 'https://img.icons8.com/color/144/android-os.png'}" onerror="this.src='https://img.icons8.com/color/144/android-os.png'">
                         <div>
                             <div class="app-name">${app.name || 'App'}</div>
-                            <div class="app-meta">${app.version || 'v1.0'} • ${app.size || '0 MB'} • ${app.downloadCount || 0} downloads</div>
+                            <div class="app-meta">${app.version || 'v1.0'} • ${app.size || '0 MB'} • ${app.downloadCount || 0} downloads • ⭐ ${app.rating || 'N/A'}</div>
                         </div>
                     </div>
                     <span class="app-status ${st.class}">${st.label}</span>
                     <div class="app-actions">
                         <button onclick="viewAppDetails('${app.id}')">Details</button>
-                        <button onclick="editApp('${app.id}')">Edit</button>
-                        <button onclick="uploadUpdate('${app.id}')">Update</button>
+                        <button onclick="openEditModal('${app.id}')">Edit</button>
+                        <button onclick="openUpdateModal('${app.id}')">Update</button>
+                        <button onclick="viewAppAnalytics('${app.id}')">Analytics</button>
                         <button class="danger" onclick="deleteApp('${app.id}')">Delete</button>
                     </div>
                 `;
@@ -1747,8 +1958,87 @@
         }
 
         // ============================================
-        // UPLOAD APP
+        // UPLOAD - Step Wizard
         // ============================================
+        function nextStep(step) {
+            currentStep = step;
+            updateSteps();
+        }
+
+        function prevStep(step) {
+            currentStep = step;
+            updateSteps();
+        }
+
+        function updateSteps() {
+            for (let i = 1; i <= 4; i++) {
+                const content = $(`step${i}`);
+                const label = $(`step${i}Label`);
+                if (content) {
+                    content.classList.toggle('active', i === currentStep);
+                }
+                if (label) {
+                    label.classList.remove('active', 'done');
+                    if (i === currentStep) label.classList.add('active');
+                    else if (i < currentStep) label.classList.add('done');
+                }
+            }
+            // Save draft progress
+            if (currentStep > 1) {
+                saveDraft();
+            }
+        }
+
+        function saveDraft() {
+            const data = {
+                name: $('upName').value,
+                category: $('upCategory').value,
+                package: $('upPackage').value,
+                shortDesc: $('upShortDesc').value,
+                longDesc: $('upLongDesc').value,
+                tags: $('upTags').value,
+                supportEmail: $('upSupportEmail').value,
+                privacy: $('upPrivacy').value,
+                website: $('upWebsite').value,
+                apkUrl: $('upApkUrl').value,
+                version: $('upVersion').value,
+                size: $('upSize').value,
+                youtube: $('upYoutube').value,
+                minAndroid: $('upMinAndroid').value,
+                whatsNew: $('upWhatsNew').value,
+                status: $('upStatus').value,
+                step: currentStep
+            };
+            drafts['current'] = data;
+            localStorage.setItem('stardust_drafts', JSON.stringify(drafts));
+        }
+
+        function loadDraft() {
+            const data = drafts['current'];
+            if (data) {
+                if (data.name) $('upName').value = data.name;
+                if (data.category) $('upCategory').value = data.category;
+                if (data.package) $('upPackage').value = data.package;
+                if (data.shortDesc) $('upShortDesc').value = data.shortDesc;
+                if (data.longDesc) $('upLongDesc').value = data.longDesc;
+                if (data.tags) $('upTags').value = data.tags;
+                if (data.supportEmail) $('upSupportEmail').value = data.supportEmail;
+                if (data.privacy) $('upPrivacy').value = data.privacy;
+                if (data.website) $('upWebsite').value = data.website;
+                if (data.apkUrl) $('upApkUrl').value = data.apkUrl;
+                if (data.version) $('upVersion').value = data.version;
+                if (data.size) $('upSize').value = data.size;
+                if (data.youtube) $('upYoutube').value = data.youtube;
+                if (data.minAndroid) $('upMinAndroid').value = data.minAndroid;
+                if (data.whatsNew) $('upWhatsNew').value = data.whatsNew;
+                if (data.status) $('upStatus').value = data.status;
+                if (data.step) {
+                    currentStep = data.step;
+                    updateSteps();
+                }
+            }
+        }
+
         function previewUploadImage(input, containerId) {
             const container = $(containerId);
             container.innerHTML = '';
@@ -1786,34 +2076,33 @@
                 const formData = new FormData();
                 formData.append('image', file);
                 fetch(`https://api.imgbb.com/1/upload?key=${IMGBB_KEY}`, {
-                    method: 'POST',
-                    body: formData
-                })
-                .then(res => res.json())
-                .then(data => {
-                    if (data.success) {
-                        resolve(data.data.url);
-                    } else {
-                        // Fallback to data URL
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.success) {
+                            resolve(data.data.url);
+                        } else {
+                            const reader = new FileReader();
+                            reader.onload = e => resolve(e.target.result);
+                            reader.onerror = reject;
+                            reader.readAsDataURL(file);
+                        }
+                    })
+                    .catch(() => {
                         const reader = new FileReader();
                         reader.onload = e => resolve(e.target.result);
                         reader.onerror = reject;
                         reader.readAsDataURL(file);
-                    }
-                })
-                .catch(() => {
-                    const reader = new FileReader();
-                    reader.onload = e => resolve(e.target.result);
-                    reader.onerror = reject;
-                    reader.readAsDataURL(file);
-                });
+                    });
             });
         }
 
         function handleUpload(e) {
             e.preventDefault();
             const btn = $('uploadBtnText');
-            btn.textContent = 'Uploading...';
+            btn.textContent = 'Publishing...';
 
             const iconFile = $('upIcon').files[0];
             const bannerFile = $('upBanner').files[0];
@@ -1831,14 +2120,8 @@
             });
 
             Promise.all(uploadPromises).then(() => {
-                // Check duplicate package
                 const packageName = $('upPackage').value.trim();
-                const existing = allApps.some(a => a.package === packageName);
-                if (existing) {
-                    btn.textContent = 'Upload Application';
-                    alert('Package name already exists. Please use a unique package name.');
-                    return;
-                }
+                const status = $('upStatus').value;
 
                 const appData = {
                     name: $('upName').value,
@@ -1853,20 +2136,19 @@
                     icon: iconUrl,
                     banner: bannerUrl,
                     screenshot: screenshotUrls.join(','),
+                    tags: $('upTags').value,
+                    supportEmail: $('upSupportEmail').value,
                     privacyPolicy: $('upPrivacy').value,
                     website: $('upWebsite').value,
-                    supportEmail: $('upSupportEmail').value,
                     youtube: $('upYoutube').value,
-                    tags: $('upTags').value,
                     minAndroid: $('upMinAndroid').value || '5.0',
-                    targetAndroid: $('upTargetAndroid').value || '12.0',
                     developerUid: currentUser.uid,
                     developerName: currentUser.displayName || currentUser.email.split('@')[0],
                     downloadCount: 0,
                     reviewCount: 0,
                     views: 0,
                     rating: 4.5,
-                    status: 'pending',
+                    status: status === 'draft' ? 'draft' : 'pending',
                     timestamp: Date.now(),
                     updatedDate: new Date().toISOString().split('T')[0],
                     verified: false,
@@ -1874,54 +2156,282 @@
                 };
 
                 db.ref('apps').push(appData).then(() => {
-                    btn.textContent = 'Upload Application';
+                    btn.textContent = 'Publish App';
                     $('uploadForm').reset();
                     $('iconPreview').innerHTML = '';
                     $('bannerPreview').innerHTML = '';
                     $('screensPreview').innerHTML = '';
-                    addNotification('App uploaded successfully! Waiting for admin approval.');
-                    alert('App uploaded successfully! It will be reviewed by admin.');
+                    currentStep = 1;
+                    updateSteps();
+
+                    // Clear draft
+                    delete drafts['current'];
+                    localStorage.setItem('stardust_drafts', JSON.stringify(drafts));
+
+                    // Add activity log
+                    addActivityLog(`App "${appData.name}" uploaded (${appData.status})`);
+
+                    if (status === 'draft') {
+                        addNotification(`App "${appData.name}" saved as draft!`);
+                        alert('App saved as draft! You can publish it later.');
+                    } else {
+                        addNotification(`App "${appData.name}" submitted for review!`);
+                        alert('App submitted! It will be reviewed and published soon.');
+                    }
                     switchPage('myapps');
                 }).catch(err => {
-                    btn.textContent = 'Upload Application';
+                    btn.textContent = 'Publish App';
                     alert('Upload failed: ' + err.message);
                 });
             }).catch(err => {
-                btn.textContent = 'Upload Application';
+                btn.textContent = 'Publish App';
                 alert('Image upload failed: ' + err.message);
             });
         }
 
         // ============================================
-        // ADMIN APPROVAL SYSTEM
+        // VIEW APP DETAILS
         // ============================================
-        function approveApp(appId) {
-            db.ref(`apps/${appId}/status`).set('live');
-            db.ref(`apps/${appId}/verified`).set(true);
-            addNotification('Your app has been approved and is now live!');
-            renderMyApps();
+        function viewAppDetails(appId) {
+            const app = allApps.find(a => a.id === appId);
+            if (!app) return;
+
+            $('detailTitle').textContent = `${app.name || 'App'} - Details`;
+            const content = $('detailContent');
+
+            let screenshotsHtml = '';
+            if (app.screenshot) {
+                const imgs = app.screenshot.split(',');
+                screenshotsHtml = `<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;">`;
+                imgs.forEach(url => {
+                    if (url.trim()) {
+                        screenshotsHtml += `<img src="${url.trim()}" style="height:60px;border-radius:6px;object-fit:cover;border:1px solid var(--border-color);cursor:pointer;" onclick="window.open('${url.trim()}','_blank')">`;
+                    }
+                });
+                screenshotsHtml += `</div>`;
+            }
+
+            content.innerHTML = `
+                <div style="display:flex;gap:12px;margin-bottom:16px;">
+                    <img src="${app.icon || 'https://img.icons8.com/color/144/android-os.png'}" style="width:64px;height:64px;border-radius:14px;object-fit:cover;border:1px solid var(--border-color);">
+                    <div>
+                        <div style="font-size:18px;font-weight:600;">${app.name}</div>
+                        <div style="color:var(--text-gray);">${app.package || 'N/A'}</div>
+                        <div style="color:var(--primary-light);">${app.developerName || 'Unknown'}</div>
+                    </div>
+                </div>
+                <div class="app-detail-row"><span class="label">Version</span><span class="value">${app.version || 'N/A'}</span></div>
+                <div class="app-detail-row"><span class="label">Category</span><span class="value">${app.category || 'N/A'}</span></div>
+                <div class="app-detail-row"><span class="label">Size</span><span class="value">${app.size || 'N/A'}</span></div>
+                <div class="app-detail-row"><span class="label">Status</span><span class="value">${app.status || 'N/A'}</span></div>
+                <div class="app-detail-row"><span class="label">Downloads</span><span class="value">${app.downloadCount || 0}</span></div>
+                <div class="app-detail-row"><span class="label">Views</span><span class="value">${app.views || 0}</span></div>
+                <div class="app-detail-row"><span class="label">Rating</span><span class="value">${app.rating || 'N/A'}</span></div>
+                <div class="app-detail-row"><span class="label">APK URL</span><span class="value"><a href="${app.downloadUrl || '#'}" target="_blank" style="color:var(--primary);">${app.downloadUrl || 'N/A'}</a></span></div>
+                <div class="app-detail-row"><span class="label">Short Description</span><span class="value">${app.shortDescription || 'N/A'}</span></div>
+                <div class="app-detail-row"><span class="label">Description</span><span class="value">${app.description || 'No description'}</span></div>
+                ${app.whatsNew ? `<div class="app-detail-row"><span class="label">What's New</span><span class="value">${app.whatsNew.replace(/\n/g, '<br>')}</span></div>` : ''}
+                ${app.tags ? `<div class="app-detail-row"><span class="label">Tags</span><span class="value">${app.tags}</span></div>` : ''}
+                ${screenshotsHtml ? `<div class="app-detail-row"><span class="label">Screenshots</span><span class="value">${screenshotsHtml}</span></div>` : ''}
+                ${app.banner ? `<div class="app-detail-row"><span class="label">Banner</span><span class="value"><img src="${app.banner}" style="max-width:100%;max-height:100px;border-radius:6px;object-fit:cover;"></span></div>` : ''}
+                ${app.verified ? `<div class="app-detail-row"><span class="label">Verified</span><span class="value" style="color:var(--green);">Yes</span></div>` : ''}
+            `;
+
+            $('detailsModal').classList.add('open');
         }
 
-        function rejectApp(appId) {
-            db.ref(`apps/${appId}/status`).set('rejected');
-            addNotification('Your app has been rejected. Please check the reason.');
-            renderMyApps();
+        function closeDetailsModal() {
+            $('detailsModal').classList.remove('open');
+        }
+
+        // ============================================
+        // EDIT APP
+        // ============================================
+        function openEditModal(appId) {
+            const app = allApps.find(a => a.id === appId);
+            if (!app) return;
+            editAppId = appId;
+            $('editAppId').value = appId;
+            $('editName').value = app.name || '';
+            $('editCategory').value = app.category || 'Games';
+            $('editShortDesc').value = app.shortDescription || '';
+            $('editLongDesc').value = app.description || '';
+            $('editTags').value = app.tags || '';
+            $('editSupportEmail').value = app.supportEmail || '';
+            $('editModal').classList.add('open');
+        }
+
+        function closeEditModal() {
+            $('editModal').classList.remove('open');
+        }
+
+        function saveEdit(e) {
+            e.preventDefault();
+            const id = $('editAppId').value;
+            const updates = {
+                name: $('editName').value,
+                category: $('editCategory').value,
+                shortDescription: $('editShortDesc').value,
+                description: $('editLongDesc').value,
+                tags: $('editTags').value,
+                supportEmail: $('editSupportEmail').value,
+                updatedDate: new Date().toISOString().split('T')[0]
+            };
+
+            db.ref(`apps/${id}`).update(updates).then(() => {
+                addActivityLog(`App "${updates.name}" edited`);
+                addNotification(`App "${updates.name}" updated successfully!`);
+                closeEditModal();
+                renderMyApps();
+                alert('App updated successfully!');
+            });
+        }
+
+        // ============================================
+        // UPDATE APP
+        // ============================================
+        function openUpdateModal(appId) {
+            const app = allApps.find(a => a.id === appId);
+            if (!app) return;
+            updateAppId = appId;
+            $('updateAppId').value = appId;
+            $('updateVersion').value = '';
+            $('updateApkUrl').value = '';
+            $('updateWhatsNew').value = '';
+            $('updateModal').classList.add('open');
+        }
+
+        function closeUpdateModal() {
+            $('updateModal').classList.remove('open');
+        }
+
+        function submitUpdate(e) {
+            e.preventDefault();
+            const id = $('updateAppId').value;
+            const version = $('updateVersion').value;
+            const apkUrl = $('updateApkUrl').value;
+            const whatsNew = $('updateWhatsNew').value;
+
+            const app = allApps.find(a => a.id === id);
+            if (!app) return;
+
+            const history = app.versionHistory || [];
+            if (app.version) history.push(app.version);
+
+            db.ref(`apps/${id}`).update({
+                version: version,
+                downloadUrl: apkUrl,
+                whatsNew: whatsNew,
+                status: 'pending_update',
+                versionHistory: history,
+                updatedDate: new Date().toISOString().split('T')[0]
+            }).then(() => {
+                addActivityLog(`Update for "${app.name}" to v${version} submitted`);
+                addNotification(`Update for "${app.name}" submitted for review!`);
+                closeUpdateModal();
+                renderMyApps();
+                alert('Update submitted! It will be reviewed and published soon.');
+            });
+        }
+
+        // ============================================
+        // DELETE APP
+        // ============================================
+        function deleteApp(appId) {
+            if (!confirm('Delete this app permanently? This cannot be undone.')) return;
+            const app = allApps.find(a => a.id === appId);
+            db.ref(`apps/${appId}`).remove().then(() => {
+                if (app) addActivityLog(`App "${app.name}" deleted`);
+                addNotification('App deleted.');
+                renderMyApps();
+            });
+        }
+
+        // ============================================
+        // ANALYTICS
+        // ============================================
+        function populateAnalyticsSelect() {
+            const select = $('anaAppSelect');
+            select.innerHTML = '<option value="">Select App</option>';
+            allApps.forEach(app => {
+                select.innerHTML += `<option value="${app.id}">${app.name}</option>`;
+            });
+        }
+
+        function viewAppAnalytics(appId) {
+            $('anaAppSelect').value = appId;
+            switchPage('analytics');
+            loadAppAnalytics();
+        }
+
+        function loadAppAnalytics() {
+            const appId = $('anaAppSelect').value;
+            const container = $('analyticsContainer');
+            if (!appId) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg>
+                        <h3>Select an App</h3>
+                        <p>Choose an app from the dropdown to see analytics.</p>
+                    </div>
+                `;
+                return;
+            }
+            const app = allApps.find(a => a.id === appId);
+            if (!app) return;
+
+            container.innerHTML = `
+                <div style="background:var(--bg-card);border:1px solid var(--border-color);border-radius:var(--radius-sm);padding:20px;">
+                    <div style="display:flex;align-items:center;gap:16px;margin-bottom:16px;">
+                        <img src="${app.icon || 'https://img.icons8.com/color/144/android-os.png'}" style="width:48px;height:48px;border-radius:12px;object-fit:cover;border:1px solid var(--border-color);">
+                        <div>
+                            <div style="font-size:18px;font-weight:600;">${app.name}</div>
+                            <div style="color:var(--text-gray);">${app.version || 'v1.0'} • ${app.category || 'General'}</div>
+                        </div>
+                    </div>
+                    <div class="stats-grid" style="margin-bottom:16px;">
+                        <div class="stat-card"><div class="stat-value">${app.downloadCount || 0}</div><div class="stat-label">Downloads</div></div>
+                        <div class="stat-card"><div class="stat-value">${app.views || 0}</div><div class="stat-label">Views</div></div>
+                        <div class="stat-card"><div class="stat-value">${app.rating || 'N/A'}</div><div class="stat-label">Rating</div></div>
+                        <div class="stat-card"><div class="stat-value">${app.reviewCount || 0}</div><div class="stat-label">Reviews</div></div>
+                    </div>
+                    <div style="background:var(--bg-input);border-radius:var(--radius-sm);padding:16px;text-align:center;color:var(--text-gray);">
+                        <div style="font-size:32px;margin-bottom:8px;">📊</div>
+                        <p>Detailed charts will be displayed here</p>
+                        <p style="font-size:13px;">Daily, Weekly, Monthly charts • Country-wise downloads</p>
+                    </div>
+                </div>
+            `;
         }
 
         // ============================================
         // REVIEWS
         // ============================================
+        function populateReviewSelect() {
+            const select = $('reviewAppSelect');
+            select.innerHTML = '<option value="">Select App</option>';
+            allApps.forEach(app => {
+                select.innerHTML += `<option value="${app.id}">${app.name}</option>`;
+            });
+        }
+
         function loadReviews() {
-            if (!currentUser) return;
-            db.ref('reviews').on('value', snapshot => {
+            const appId = $('reviewAppSelect').value;
+            if (!appId) {
+                $('reviewsList').innerHTML = `
+                    <div class="empty-state">
+                        <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                        <h3>Select an App</h3>
+                        <p>Choose an app to see its reviews.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            db.ref(`reviews/${appId}`).on('value', snapshot => {
                 const data = snapshot.val();
                 allReviews = data || {};
-                if (currentPage === 'reviews') renderReviews();
-                let total = 0;
-                Object.values(allReviews).forEach(appReviews => {
-                    if (appReviews) total += Object.keys(appReviews).length;
-                });
-                $('reviewBadge').textContent = total;
+                renderReviews();
             });
         }
 
@@ -1930,15 +2440,13 @@
             container.innerHTML = '';
 
             let allRev = [];
-            Object.keys(allReviews).forEach(appId => {
-                const app = allApps.find(a => a.id === appId);
-                if (app && allReviews[appId]) {
-                    Object.keys(allReviews[appId]).forEach(revId => {
-                        const rev = allReviews[appId][revId];
-                        allRev.push({ ...rev, id: revId, appId, appName: app.name });
-                    });
-                }
-            });
+            const appId = $('reviewAppSelect').value;
+            if (appId && allReviews[appId]) {
+                Object.keys(allReviews[appId]).forEach(revId => {
+                    const rev = allReviews[appId][revId];
+                    allRev.push({ ...rev, id: revId, appId: appId });
+                });
+            }
 
             if (currentReviewFilter !== 'all') {
                 const star = parseInt(currentReviewFilter);
@@ -1950,7 +2458,7 @@
                     <div class="empty-state">
                         <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
                         <h3>No Reviews</h3>
-                        <p>Your apps don't have any reviews yet.</p>
+                        <p>This app doesn't have any reviews yet.</p>
                     </div>
                 `;
                 return;
@@ -1965,7 +2473,6 @@
                     <div class="rev-head">
                         <span class="rev-user">${rev.author || 'Anonymous'}</span>
                         <span class="rev-stars">${stars}</span>
-                        <span class="rev-app">${rev.appName || 'App'}</span>
                     </div>
                     <div class="rev-text">${rev.text || ''}</div>
                     ${rev.reply ? `<div class="dev-reply"><strong>Developer Reply:</strong> ${rev.reply}</div>` : ''}
@@ -1999,72 +2506,6 @@
         }
 
         // ============================================
-        // UPDATES
-        // ============================================
-        function renderUpdates() {
-            const container = $('updatesList');
-            container.innerHTML = '';
-            const updates = allApps.filter(a => a.status === 'pending_update' || a.updateHistory);
-            if (updates.length === 0) {
-                container.innerHTML = `
-                    <div class="empty-state">
-                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
-                        <h3>No Updates</h3>
-                        <p>No pending updates for your apps.</p>
-                    </div>
-                `;
-                return;
-            }
-            updates.forEach(app => {
-                const div = document.createElement('div');
-                div.className = 'app-list-item';
-                const status = app.status === 'pending_update' ? 'pending' : 'live';
-                div.innerHTML = `
-                    <div class="app-info">
-                        <img src="${app.icon || 'https://img.icons8.com/color/144/android-os.png'}" style="width:40px;height:40px;border-radius:10px;">
-                        <div>
-                            <div class="app-name">${app.name}</div>
-                            <div class="app-meta">${app.version || 'v1.0'} • ${status === 'pending' ? 'Pending Approval' : 'Live'}</div>
-                        </div>
-                    </div>
-                    <span class="app-status ${status === 'pending' ? 'pending' : 'live'}">${status === 'pending' ? 'Pending' : 'Live'}</span>
-                    <div class="app-actions">
-                        <button onclick="uploadUpdate('${app.id}')">New Update</button>
-                    </div>
-                `;
-                container.appendChild(div);
-            });
-        }
-
-        function uploadUpdate(appId) {
-            const version = prompt('Enter new version (e.g., v2.0.1):');
-            if (!version) return;
-            const notes = prompt('What\'s new in this version?');
-            const apkUrl = prompt('APK download URL for this update:');
-            if (!apkUrl) return;
-
-            const app = allApps.find(a => a.id === appId);
-            if (!app) return;
-
-            const history = app.versionHistory ? (Array.isArray(app.versionHistory) ? app.versionHistory : app.versionHistory
-                .split(',')) : [];
-            history.push(app.version || 'v1.0');
-
-            db.ref(`apps/${appId}`).update({
-                version: version,
-                downloadUrl: apkUrl,
-                whatsNew: notes || 'Update released',
-                versionHistory: history,
-                status: 'pending_update',
-                updatedDate: new Date().toISOString().split('T')[0]
-            }).then(() => {
-                addNotification(`Update ${version} submitted for approval!`);
-                alert('Update submitted! Waiting for admin approval.');
-                renderUpdates();
-            });
-        }
-
-        // ============================================
         // NOTIFICATIONS
         // ============================================
         function loadNotifications() {
@@ -2079,12 +2520,11 @@
 
         function addNotification(text) {
             if (!currentUser) return;
-            const notif = {
+            db.ref(`notifications/${currentUser.uid}`).push({
                 text: text,
                 timestamp: Date.now(),
                 read: false
-            };
-            db.ref(`notifications/${currentUser.uid}`).push(notif);
+            });
         }
 
         function renderNotifications() {
@@ -2127,33 +2567,40 @@
         }
 
         // ============================================
-        // ANALYTICS
+        // ACTIVITY LOG
         // ============================================
-        function loadAnalytics() {
-            let todayDownloads = 0,
-                todayViews = 0,
-                todayInstalls = 0;
-            let weekDownloads = 0,
-                monthDownloads = 0,
-                yearDownloads = 0;
+        function addActivityLog(action) {
+            activityLog.unshift({ action, timestamp: Date.now() });
+            if (activityLog.length > 100) activityLog.pop();
+            localStorage.setItem('stardust_activity_log', JSON.stringify(activityLog));
+        }
 
-            allApps.forEach(app => {
-                weekDownloads += app.downloadCount || 0;
-                monthDownloads += app.downloadCount || 0;
-                yearDownloads += app.downloadCount || 0;
-                todayViews += app.views || 0;
-                todayInstalls += app.downloadCount || 0;
-                if (app.downloadDate === new Date().toISOString().split('T')[0]) {
-                    todayDownloads += app.downloadCount || 0;
-                }
+        function viewActivityLog() {
+            if (activityLog.length === 0) {
+                alert('No activity logged yet.');
+                return;
+            }
+            let msg = '📜 Recent Activity:\n\n';
+            activityLog.slice(0, 20).forEach(log => {
+                const date = new Date(log.timestamp).toLocaleString();
+                msg += `• ${date}: ${log.action}\n`;
             });
+            alert(msg);
+        }
 
-            $('anaTodayDownloads').textContent = todayDownloads;
-            $('anaTodayViews').textContent = todayViews;
-            $('anaTodayInstalls').textContent = todayInstalls;
-            $('anaWeekDownloads').textContent = weekDownloads;
-            $('anaMonthDownloads').textContent = monthDownloads;
-            $('anaYearDownloads').textContent = yearDownloads;
+        function viewDrafts() {
+            const draftKeys = Object.keys(drafts);
+            if (draftKeys.length === 0) {
+                alert('No drafts saved.');
+                return;
+            }
+            let msg = '📂 Saved Drafts:\n\n';
+            draftKeys.forEach(key => {
+                const d = drafts[key];
+                msg += `• ${d.name || 'Untitled'} (Step ${d.step || 1})\n`;
+            });
+            msg += '\nClick "Upload App" to continue your draft.';
+            alert(msg);
         }
 
         // ============================================
@@ -2164,6 +2611,7 @@
             db.ref(`developers/${currentUser.uid}`).once('value').then(snap => {
                 const data = snap.val() || {};
                 $('profName').value = data.displayName || currentUser.displayName || '';
+                $('profBio').value = data.bio || '';
                 $('profWebsite').value = data.website || '';
                 $('profGithub').value = data.github || '';
                 $('profEmail').value = data.supportEmail || currentUser.email || '';
@@ -2189,6 +2637,7 @@
             if (!currentUser) return;
             const data = {
                 displayName: $('profName').value,
+                bio: $('profBio').value,
                 website: $('profWebsite').value,
                 github: $('profGithub').value,
                 supportEmail: $('profEmail').value,
@@ -2268,10 +2717,13 @@
             toggleTheme();
         }
 
-        function generateApiKey() {
-            const key = 'sk_' + Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-            alert('Your API Key: ' + key + '\nSave this key. It will not be shown again.');
-            addNotification('New API key generated.');
+        function changeLanguage() {
+            const lang = prompt('Select language (en, hi, es, fr, de):', 'en');
+            if (lang) {
+                localStorage.setItem('stardust_lang', lang);
+                addNotification(`Language changed to ${lang}`);
+                alert(`Language set to ${lang}`);
+            }
         }
 
         // ============================================
@@ -2305,43 +2757,14 @@
             toggleTheme(); }
 
         // ============================================
-        // APP DETAILS VIEW
-        // ============================================
-        function viewAppDetails(appId) {
-            const app = allApps.find(a => a.id === appId);
-            if (!app) return;
-            alert(
-                `📱 App Details\n\nName: ${app.name}\nVersion: ${app.version}\nCategory: ${app.category}\nPackage: ${app.package}\nDownloads: ${app.downloadCount || 0}\nViews: ${app.views || 0}\nRating: ${app.rating || 'N/A'}\nStatus: ${app.status || 'pending'}\n\nDescription: ${app.description || 'No description'}\n\nWhat's New: ${app.whatsNew || 'N/A'}`);
-        }
-
-        function editApp(appId) {
-            const app = allApps.find(a => a.id === appId);
-            if (!app) return;
-            const newName = prompt('App Name:', app.name);
-            if (newName && newName.trim()) {
-                db.ref(`apps/${appId}/name`).set(newName.trim());
-                addNotification('App name updated.');
-            }
-            const newDesc = prompt('Short Description:', app.shortDescription || '');
-            if (newDesc !== null) {
-                db.ref(`apps/${appId}/shortDescription`).set(newDesc);
-                addNotification('Description updated.');
-            }
-        }
-
-        function deleteApp(appId) {
-            if (!confirm('Delete this app permanently? This cannot be undone.')) return;
-            db.ref(`apps/${appId}`).remove().then(() => {
-                addNotification('App deleted.');
-                renderMyApps();
-            });
-        }
-
-        // ============================================
         // INIT
         // ============================================
         document.addEventListener('DOMContentLoaded', () => {
             showLoading(true, 'Starting Stardust Console...');
+
+            // Load draft if exists
+            loadDraft();
+
             if (auth.currentUser) {
                 showLoading(false);
             } else {
@@ -2352,8 +2775,10 @@
         });
 
         console.log('🚀 Stardust Developer Console loaded successfully!');
-        console.log('📦 Features: Login/Signup, Dashboard, App Management, Upload with ImgBB, Analytics, Reviews, Updates, Notifications, Profile, Settings');
-        console.log('👑 Admin approval system: Apps go to "pending" status, admin approves to make "live"');
+        console.log('📦 Features: Dashboard, App Management, Upload Wizard, Analytics, Reviews, Notifications, Profile, Settings');
+        console.log('🔄 Real-time: Apps sync automatically with Firebase');
+        console.log('📝 Drafts: Save progress and continue later');
+        console.log('📜 Activity Log: Track all your actions');
     </script>
 </body>
 </html>
